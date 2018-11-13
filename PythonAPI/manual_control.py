@@ -180,7 +180,7 @@ class World(object):
                 actor.destroy()
 
     def _get_random_blueprint(self):
-        bp = random.choice(self.world.get_blueprint_library().filter('vehicle'))
+        bp = random.choice(self.world.get_blueprint_library().filter('mustang'))
         if bp.has_attribute('color'):
             color = random.choice(bp.get_attribute('color').recommended_values)
             bp.set_attribute('color', color)
@@ -514,6 +514,7 @@ class CameraManager(object):
         self._recording = False
         self._camera_transforms = [
             carla.Transform(carla.Location(x=1.6, z=1.7)),
+            carla.Transform(carla.Location(z=12), carla.Rotation(pitch=-90)),
             carla.Transform(carla.Location(x=-5.5, z=2.8), carla.Rotation(pitch=-15))]
         self._transform_index = 1
         self._sensors = [
