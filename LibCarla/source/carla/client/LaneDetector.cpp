@@ -90,8 +90,9 @@ namespace client {
       debug.DrawPoint(new_bounds[i], 0.1f, {255u, 0u, 0u}, 5.0f);
       auto w = _map->GetWaypoint(new_bounds[i], false);
       if (w != nullptr) {
-        debug.DrawPoint(w->GetTransform().location + geom::Location(0,0,4), 0.1f, {0, 255u, 0u}, 5.0f);
+        debug.DrawPoint(w->GetTransform().location + geom::Location(0,0,3), 0.1f, {0, 255u, 0u}, 5.0f);
       }
+      debug.DrawPoint(_map->GetWaypoint(new_bounds[i])->GetTransform().location + geom::Location(0,0,3), 0.1f, {0u, 0u, 255u}, 5.0f);
     }
     _bounds = new_bounds;
     return crossed_lanes.empty() ?

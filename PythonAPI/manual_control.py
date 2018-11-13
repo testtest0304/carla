@@ -175,7 +175,12 @@ class World(object):
         self.hud.render(display)
 
     def destroy(self):
-        for actor in [self.camera_manager.sensor, self.collision_sensor.sensor, self.vehicle]:
+        actors = [
+            self.camera_manager.sensor,
+            self.collision_sensor.sensor,
+            self.lane_invasion_sensor.sensor,
+            self.vehicle]
+        for actor in actors:
             if actor is not None:
                 actor.destroy()
 
@@ -514,7 +519,7 @@ class CameraManager(object):
         self._recording = False
         self._camera_transforms = [
             carla.Transform(carla.Location(x=1.6, z=1.7)),
-            carla.Transform(carla.Location(z=12), carla.Rotation(pitch=-90)),
+            carla.Transform(carla.Location(z=20), carla.Rotation(pitch=-90)),
             carla.Transform(carla.Location(x=-5.5, z=2.8), carla.Rotation(pitch=-15))]
         self._transform_index = 1
         self._sensors = [
@@ -532,6 +537,7 @@ class CameraManager(object):
             if item[0].startswith('sensor.camera'):
                 bp.set_attribute('image_size_x', str(hud.dim[0]))
                 bp.set_attribute('image_size_y', str(hud.dim[1]))
+                bp.set_attribute('fov', '120')
             item.append(bp)
         self._index = None
 
